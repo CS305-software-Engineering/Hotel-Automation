@@ -15,5 +15,6 @@ Following Modules included in the app
 10.Hotel management should be able to see all the orders done on a particular day.
 11.On the basis of this historical data, the hotel management should be able to predict the raw materials required for the next day.
 
-WorkFlow of the Project
+## WorkFlow of the Project
+
 ![image](https://user-images.githubusercontent.com/55214244/113440507-308c0a80-940a-11eb-8004-8e6d1d297fec.png)
