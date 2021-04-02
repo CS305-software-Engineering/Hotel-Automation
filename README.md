@@ -14,3 +14,5 @@ Following Modules included in the app
 9. For a new order, the customer should have the option to select from previous orders.
 10.Hotel management should be able to see all the orders done on a particular day.
 11.On the basis of this historical data, the hotel management should be able to predict the raw materials required for the next day.
+
+![image](https://user-images.githubusercontent.com/55214244/113440507-308c0a80-940a-11eb-8004-8e6d1d297fec.png)
