@@ -2,7 +2,7 @@
 
 ## Atithi is a hotel automation app comprising a web application which takes food orders. The main goal of this automated software is to ease the food ordering process for the people staying in hotels.
 
-Following Modules included in the app
+Following Modules included in the application:-
 1. Registration/Login page where the customer can register
 2. Separate login for the hotel staff, managers
 3. Forgot password page and the ability to mail yourself an OTP
@@ -15,6 +15,6 @@ Following Modules included in the app
 10.Hotel management should be able to see all the orders done on a particular day.
 11.On the basis of this historical data, the hotel management should be able to predict the raw materials required for the next day.
 
-## WorkFlow of the Project
+### WorkFlow of the Project
 
 ![image](https://user-images.githubusercontent.com/55214244/113440507-308c0a80-940a-11eb-8004-8e6d1d297fec.png)
