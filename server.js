@@ -6,7 +6,7 @@
  const path = require('path')
 
  app.get('/', (req,res)=>{
-     res.render('home')
+     res.render('index')
  })
 
  //set Template engine
