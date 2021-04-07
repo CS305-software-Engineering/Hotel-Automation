@@ -12,8 +12,8 @@ Following Modules included in the application:-
 7. After ordering food, there should be a timer on the customer's screen to intimate him of the time food will be ready
 8. The order from every customer should be forwarded to the hotel management's application, from where the staff has the choice to accept or decline any order.
 9. For a new order, the customer should have the option to select from previous orders.
-10.Hotel management should be able to see all the orders done on a particular day.
-11.On the basis of this historical data, the hotel management should be able to predict the raw materials required for the next day.
+10. Hotel management should be able to see all the orders done on a particular day.
+11. On the basis of this historical data, the hotel management should be able to predict the raw materials required for the next day.
 
 ### WorkFlow of the Project
 
