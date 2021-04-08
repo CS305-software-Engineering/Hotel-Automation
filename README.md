@@ -26,5 +26,5 @@ Following Modules included in the application:-
 2. Clone the project
 3. Go to project directory from terminal 
 4. Type ```yarn install```
-5. 
-6. 
+5. Type ```yarn dev``` to run the application.
+ 
