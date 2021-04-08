@@ -19,8 +19,12 @@ Following Modules included in the application:-
 
 ![image](https://user-images.githubusercontent.com/55214244/113440507-308c0a80-940a-11eb-8004-8e6d1d297fec.png)
 
-#Project directory structure
+# Project directory structure
 
-#How to run
+# How to run
 1. Install yarn on your machine
-2. 
+2. Clone the project
+3. Go to project directory from terminal 
+4. Type ```yarn install```
+5. 
+6. 
