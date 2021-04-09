@@ -33,12 +33,15 @@ app.get('/staff', (req,res)=>{
   res.render('hotel/staff')
 })
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+   console.log(`Listening on port ${PORT}`)
 })
- //set Template engine
- app.use(expressLayout)
- app.set('views', path.join(__dirname, '/resources/views'))
- app.set('view engine', 'ejs')
+//set Template engine
+app.use(expressLayout)
+app.set('views', path.join(__dirname, '/resources/views'))
+app.set('view engine', 'ejs')
+
+
+
 
 
 
