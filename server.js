@@ -30,6 +30,14 @@ app.get('/login', (req,res)=>{
    res.render('auth/login')
  })
 
+app.get('/manager', (req,res)=>{
+  res.render('hotel/manager')
+}) 
+
+app.get('/staff', (req,res)=>{
+  res.render('hotel/staff')
+})
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
