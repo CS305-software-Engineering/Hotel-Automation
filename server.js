@@ -4,31 +4,26 @@
  const ejs = require('ejs')
  const expressLayout = require('express-ejs-layouts')
  const path = require('path')
+ const mongoose = require('mongoose')
+ const flash = require('express-flash')
+//mongodb connection
+const url = 'mongodb+srv://harshagarg09:harshagarg09@cluster0.iizlz.mongodb.net/atithi?retryWrites=true&w=majority'
+mongoose.connect(url,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+).then(() => {
+    console.log("Database connected")
+});
+ 
 
- //Assets
+//Assets
+// app.use(flash())
  app.use(express.static('public'))
-
- app.get('/', (req,res)=>{
-   res.render('index')
-})
-app.get('/cart', (req,res)=>{
-   res.render('customers/cart')
-})
-app.get('/u_home', (req,res)=>{
-  res.render('customers/u_home')
-})
-app.get('/u_hotel', (req,res)=>{
-  res.render('customers/u_hotel')
-})
-app.get('/u_register', (req,res)=>{
-  res.render('auth/u_register')
-})
-app.get('/manager_register', (req,res)=>{
-   res.render('auth/manager_register')
- })
-app.get('/login', (req,res)=>{
-   res.render('auth/login')
- })
+ app.use(express.urlencoded({extended : false}))
+ app.use(express.json())
+ require('./routes/web')(app)
 
 app.get('/manager', (req,res)=>{
   res.render('hotel/manager')
@@ -37,7 +32,6 @@ app.get('/manager', (req,res)=>{
 app.get('/staff', (req,res)=>{
   res.render('hotel/staff')
 })
-
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
@@ -45,5 +39,8 @@ app.listen(PORT, () => {
  app.use(expressLayout)
  app.set('views', path.join(__dirname, '/resources/views'))
  app.set('view engine', 'ejs')
+
+
+
 
  
