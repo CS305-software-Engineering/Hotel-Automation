@@ -5,7 +5,7 @@
  const expressLayout = require('express-ejs-layouts')
  const path = require('path')
  const mongoose = require('mongoose')
- const flash = require('express-flash')
+ //const flash = require('express-flash')
 //mongodb connection
 const url = 'mongodb+srv://harshagarg09:harshagarg09@cluster0.iizlz.mongodb.net/atithi?retryWrites=true&w=majority'
 mongoose.connect(url,
@@ -25,13 +25,7 @@ mongoose.connect(url,
  app.use(express.json())
  require('./routes/web')(app)
 
-app.get('/manager', (req,res)=>{
-  res.render('hotel/manager')
-}) 
 
-app.get('/staff', (req,res)=>{
-  res.render('hotel/staff')
-})
 app.listen(PORT, () => {
    console.log(`Listening on port ${PORT}`)
 })
