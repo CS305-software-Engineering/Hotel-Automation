@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UPDATE MENU</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Lobster&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+    </head>
+
+    <body>
+            <!--==========================
+            Header
+        ============================-->
+        <!-- header section starts -->
+        <%- include('../partials/navbar') %>
+        <!-- header section ends -->
+        <div>
+            <div class="menulabel"> <h1>UPLOAD DISH</h1> </div>
+            <div class="main"> 
+                <form action="" method="post" onsubmit="return confirm('Are you sure you want to submit?')"> 
+                    <% if(messages.error){ %>
+                    <span style="color: red; font-size: 18px;font-weight: 700;"><%= messages.error %></span>
+                    <% }%>
+                    <h2 class="labels">Hotel</h2> 
+                    <input class="inputfield" type="text" name="hotel" required>
+                    <h2 class="labels">Dish</h2> 
+                    <input class="inputfield" type="text" name="dish" required>
+                    <h2 class="labels">Description</h2> 
+                    <input class="inputfield" type="text" name="description" required>
+                    <h2 class="labels">Ingredients</h2> 
+                    <input class="inputfield" type="text" name="Ingredients" required>
+                    </br>
+                    <input class="button" type="submit" name="dish_upload" value="upload">
+                </form>
+            </div>
+        </div>  
+
+    </body>
+
+</html>
