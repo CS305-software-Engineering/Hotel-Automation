@@ -14,6 +14,12 @@
 </head>
 
 <body>
+    <script>
+        function init() {
+document.getElementById("email").value = "";
+}
+window.onload = init;
+    </script>
     <!--==========================
     Header
   ============================-->
@@ -23,11 +29,14 @@
 <div>
 <div class="loginlabel"> <h1>LOGIN</h1> </div>
 <div class="main"> 
-    <form action="" method="post" onsubmit="return confirm('Are you sure you want to submit?')"> 
+    <form action="/login" method="POST" autocomplete="off"> 
+        <% if(messages.error){ %>
+            <span style="color: red; font-size: 18px;font-weight: 700;"><%= messages.error %></span>
+        <% }%>
         <h2 class="labels">Email id</h2> 
-        <input class="inputfield" type="text" name="email" required>
+        <input id="email" class="inputfield" type="text" name="email" value="" required>
         <h2 class="labels">Password</h2> 
-        <input class="inputfield" type="password" name="password" required>
+        <input id="password" class="inputfield" type="password" name="password" value="" required>
         <input class="button" type="submit" name="login" value="Login">        
     </form>
 </div>
