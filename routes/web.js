@@ -27,6 +27,30 @@ function initRoutes(app){
       app.get('/staff', (req,res)=>{
         res.render('hotel/staff')
       })
+     app.get('/managerhome', (req,res)=>{
+  res.render('hotel/managerhome')
+})
+
+app.get('/viewprofile', (req,res)=>{
+  res.render('hotel/viewprofile')
+})
+
+app.get('/neworders', (req,res)=>{
+  res.render('hotel/neworders')
+})
+
+app.get('/addstaff', (req,res)=>{
+  res.render('hotel/addstaff')
+})
+
+app.get('/completedorder', (req,res)=>{
+  res.render('hotel/completedorder')
+})
+
+app.get('/rawmaterials', (req,res)=>{
+  res.render('hotel/rawmaterials')
+})
+
 
 }
 
