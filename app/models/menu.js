@@ -8,4 +8,4 @@ const menuSchema = new Schema({
     ingredients : { type: String},
 }, {timestamps: true})
 
-module.exports = mongoose.model('Hotel',hotelSchema)
+module.exports = mongoose.model('Menu',menuSchema)
