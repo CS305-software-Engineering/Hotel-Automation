@@ -21,7 +21,7 @@
 <%- include('../partials/navbar') %>
 <!-- header section ends -->
 <div>
-<div class="loginlabel"> <h1>Hotel REGISTER</h1> </div>
+<div class="loginlabel"> <h1>HOTEL REGISTRATION</h1> </div>
 <div class="main"> 
     <form action="" method="post" onsubmit="return confirm('Are you sure you want to submit?')"> 
         <% if(messages.error){ %>
@@ -31,13 +31,14 @@
         <input class="inputfield" type="text" name="hotelname" required>
         <h2 class="labels">Hotel Address</h2> 
         <input class="inputfield" type="text" name="hoteladdr" required>
-        <h2 class="labels">Name</h2> 
+        <h2 class="labels">Manager Name</h2> 
         <input class="inputfield" type="text" name="managername" required>
         <h2 class="labels">Email id</h2> 
         <input class="inputfield" type="email" name="email" required>
         <h2 class="labels">Password</h2> 
         <input class="inputfield" type="password" name="password" required>
-        <a>Already have an account?</a>
+        <br>
+        <a style ="font-size:25px; padding-left:450px;" href="/login">Already have an account?</a>
         <input class="button" type="submit" name="customer_signup" value="Signup">        
     </form>
 </div>
