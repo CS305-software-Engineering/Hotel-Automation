@@ -87,7 +87,7 @@ function authController(){
                 }
             })
              //CHeck if hotel exists
-             User.exists({ hotelname: hotelname }, (err, result) => {
+             Hotel.exists({ hotelname: hotelname }, (err, result) => {
                 if(result){
                     req.flash('error','Hotel already registered, please login!');
                     return res.redirect('/manager_register')

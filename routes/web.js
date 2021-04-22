@@ -1,14 +1,13 @@
 const indexController = require('../app/http/controllers/indexController')
 const authController = require('../app/http/controllers/authController')
+const homeController = require('../app/http/controllers/customers/homeController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
      app.get('/cart', (req,res)=>{
         res.render('customers/cart')
      })
-     app.get('/u_home', (req,res)=>{
-       res.render('customers/u_home')
-     })
+     app.get('/u_home', homeController().index)
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
