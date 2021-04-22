@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Customer register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,8 +19,25 @@
   ============================-->
 <!-- header section starts -->
 <%- include('../partials/navbar') %>
-<%- include('../hotel/manager') %>
 <!-- header section ends -->
- 
+<div>
+<div class="loginlabel"> <h1>ADD STAFF</h1> </div>
+<div class="main"> 
+    <form action="" method="post" onsubmit="return confirm('Are you sure you want to submit?')"> 
+        <% if(messages.error){ %>
+        <span style="color: red; font-size: 18px;font-weight: 700;"><%= messages.error %></span>
+        <% }%>
+        <h2 class="labels">Name</h2> 
+        <input class="inputfield" type="text" name="username" required>
+        <h2 class="labels">Email id</h2> 
+        <input class="inputfield" type="email" name="email" required>
+        <h2 class="labels">Password</h2> 
+        <input class="inputfield" type="password" name="password" required>
+        <a>Already added?</a>
+        <input class="button" type="submit" name="customer_signup" value="Signup">        
+    </form>
+</div>
+</div>  
+
 </body>
 </html>
