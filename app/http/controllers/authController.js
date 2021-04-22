@@ -1,4 +1,6 @@
 const User = require('../../models/user')
+const Hotel = require('../../models/hotel')
+
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 function authController(){
@@ -109,6 +111,17 @@ function authController(){
             console.log(req.body);
 
             //#TODO: Save Hotel in database: yet to be implemented
+            const hotel = new Hotel({
+                hotelname: hotelname,
+                hoteladdr: hoteladdr,
+                manager: managername,
+            })
+            hotel.save().then((hotel) => {
+                return res.redirect('/login')
+            }).catch(err => {
+              //  console.log(err)
+                return res.redirect('/manager_register')
+            })
             
         }
     }
