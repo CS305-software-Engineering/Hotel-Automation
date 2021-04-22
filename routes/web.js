@@ -30,7 +30,9 @@ function initRoutes(app){
 app.get('/managerhome', (req,res)=>{
   res.render('hotel/managerhome')
 })
-
+app.get('/staff', (req,res)=>{
+  res.render('hotel/staff')
+})
 app.get('/viewprofile', (req,res)=>{
   res.render('hotel/viewprofile')
 })
