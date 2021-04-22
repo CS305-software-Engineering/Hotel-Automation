@@ -20,6 +20,7 @@ function initRoutes(app){
      app.post('/manager_register', authController().postRegister_manager)
      app.get('/login', authController().login)
      app.post('/login', authController().postLogin)
+     app.post('/logout',authController().logout)
      // app.get('/staff', staffController().register_staff)
      // app.post('/staff', staffController().postRegister_staff)
 
