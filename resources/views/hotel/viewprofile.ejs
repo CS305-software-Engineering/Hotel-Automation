@@ -13,6 +13,14 @@
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
 </head>
 
+<style>
+div.content{
+  margin-left: 200px;
+  padding: 70px 80px;
+  height: 100%;
+}
+</style>
+
 <body>
     <!--==========================
     Header
@@ -22,6 +30,21 @@
 <%- include('../hotel/manager') %>
 <!-- header section ends -->
 
-
+<div class="content">
+  <div class="loginlabel"> <h1>PROFILE</h1> </div>
+  <div class="main"> 
+      <form>
+        <h2 class="labels">Hotel Name : </h2> 
+        
+        <h2 class="labels">Hotel Address : </h2> 
+        
+        <h2 class="labels">Name : </h2> 
+        
+        <h2 class="labels">Email ID : </h2> 
+        
+        <h2 class="labels">Password : </h2> 
+      </form>  
+      </div>
+    </div> 
 </body>
 </html>
