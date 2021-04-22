@@ -1,5 +1,6 @@
 const indexController = require('../app/http/controllers/indexController')
 const authController = require('../app/http/controllers/authController')
+//const staffController = require('../app/http/controllers/managers/staffController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -19,15 +20,14 @@ function initRoutes(app){
      app.post('/manager_register', authController().postRegister_manager)
      app.get('/login', authController().login)
      app.post('/login', authController().postLogin)
+     // app.get('/staff', staffController().register_staff)
+     // app.post('/staff', staffController().postRegister_staff)
 
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
       }) 
       
-      app.get('/staff', (req,res)=>{
-        res.render('hotel/staff')
-      })
-     app.get('/managerhome', (req,res)=>{
+app.get('/managerhome', (req,res)=>{
   res.render('hotel/managerhome')
 })
 
