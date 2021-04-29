@@ -1,4 +1,4 @@
-const User = require('../../models/user')
+const User = require('../../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
@@ -35,9 +35,10 @@ function staffController(){
                 role:'staff'
             })
             user.save().then((user) => {
+                console.log('Added Successfully');
                 return res.redirect('/manager')
             }).catch(err => {
-              //  console.log(err)
+                console.log(Error);
                 return res.redirect('/hotel/staff')
             })
             console.log(req.body);           

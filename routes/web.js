@@ -1,7 +1,8 @@
 const indexController = require('../app/http/controllers/indexController')
 const authController = require('../app/http/controllers/authController')
 const homeController = require('../app/http/controllers/customers/homeController')
-//const staffController = require('../app/http/controllers/managers/staffController')
+const orderController = require('../app/http/controllers/customers/orderController')
+const staffController = require('../app/http/controllers/managers/staffController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -20,8 +21,10 @@ function initRoutes(app){
      app.get('/login', authController().login)
      app.post('/login', authController().postLogin)
      app.post('/logout',authController().logout)
-     // app.get('/staff', staffController().register_staff)
-     // app.post('/staff', staffController().postRegister_staff)
+     app.get('/staff', staffController().register_staff)
+     app.post('/staff', staffController().postRegister_staff)
+
+     app.post('/orders',orderController().store)
 
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
@@ -48,6 +51,10 @@ app.get('/addstaff', (req,res)=>{
 app.get('/completedorder', (req,res)=>{
   res.render('hotel/completedorder')
 })
+
+// app.get('/staff_list', (req,res)=>{
+//  res.render('hotel/staff_list')
+// })
 
 app.get('/rawmaterials', (req,res)=>{
   res.render('hotel/rawmaterials')

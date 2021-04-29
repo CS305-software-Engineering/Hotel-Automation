@@ -3,6 +3,7 @@ const Hotel = require('../../models/hotel')
 
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+
 function authController(){
     return {
         login(req,res) {
