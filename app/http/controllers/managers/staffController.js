@@ -19,9 +19,8 @@ function staffController(){
             //CHeck if email exists
             User.exists({ email: email }, (err, result) => {
                 if(result){
-                    console.log('Email already taken! Person already added');
                     req.flash('error','Email already taken! Person already added');
-                    return res.redirect('/hotel/staff')
+                    return res.redirect('/staff')
                 }
             })
         
@@ -35,11 +34,11 @@ function staffController(){
                 role:'staff'
             })
             user.save().then((user) => {
-                console.log('Added Successfully');
+                req.flash('Added Successfully');
                 return res.redirect('/manager')
             }).catch(err => {
                 console.log(Error);
-                return res.redirect('/hotel/staff')
+                return res.redirect('/staff')
             })
             console.log(req.body);           
         }
