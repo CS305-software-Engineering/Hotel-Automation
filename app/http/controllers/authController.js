@@ -44,7 +44,7 @@ function authController(){
             //Logic
             const {username, email, password} = req.body;
             //Validate request 
-            if(!username || !email || !password){
+            if(!username || !email || !password ){
                 return res.redirect('/u_register')
             }
             //CHeck if email exists

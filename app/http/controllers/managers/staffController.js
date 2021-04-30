@@ -14,7 +14,8 @@ function staffController(){
             //Validate request #TODO : yet to be implemented
             //show errors??
             if(!username || !email || !password){
-                return res.redirect('hotel/staff')
+                req.flash('Please fill all the fields');
+                return res.redirect('/staff')
             }
             //CHeck if email exists
             User.exists({ email: email }, (err, result) => {
@@ -23,7 +24,6 @@ function staffController(){
                     return res.redirect('/staff')
                 }
             })
-        
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database
