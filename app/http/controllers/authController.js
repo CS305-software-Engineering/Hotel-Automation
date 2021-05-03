@@ -3,6 +3,7 @@ const Hotel = require('../../models/hotel')
 
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+
 function authController(){
     return {
         login(req,res) {
@@ -43,7 +44,7 @@ function authController(){
             //Logic
             const {username, email, password} = req.body;
             //Validate request 
-            if(!username || !email || !password){
+            if(!username || !email || !password ){
                 return res.redirect('/u_register')
             }
             //CHeck if email exists
@@ -103,12 +104,11 @@ function authController(){
                 role: 'manager'
             })
             user.save().then((user) => {
-                return res.redirect('/login')
+                return res.redirect('/manager')
             }).catch(err => {
               //  console.log(err)
                 return res.redirect('/manager_register')
             })
-            console.log(req.body);
 
             //#TODO: Save Hotel in database: yet to be implemented
             const hotel = new Hotel({
@@ -123,6 +123,11 @@ function authController(){
                 return res.redirect('/manager_register')
             })
             
+        },
+
+        logout(req,res){
+            req.logout()
+            return res.redirect('/manager_register')
         }
     }
 }

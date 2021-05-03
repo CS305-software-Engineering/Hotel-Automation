@@ -64,7 +64,7 @@ body {
     Header
   ============================-->
 <!-- header section starts -->
-<%- include('../partials/navbar') %>
+<%- include('../partials/manager_nav') %>
 <!-- header section ends -->
 <div id="viewport">
     <!-- Sidebar -->
@@ -72,18 +72,13 @@ body {
       <div style="height:40px"></div>
       <ul class="nav">
         <li>
-            <a href="/managerhome">
-              Home
-            </a>
-          </li>
-        <li>
           <a href="/viewprofile">
             View Profile
           </a>
         </li>
         <li>
           <a href="/neworders">
-            New Orders
+            Pending Orders
           </a>
         </li>
         <li>
@@ -94,6 +89,8 @@ body {
         <li>
           <a href="/addstaff">
             Add Staff
+          <a href="/staff">
+            Add a Staff Member
           </a>
         </li>
         <li>

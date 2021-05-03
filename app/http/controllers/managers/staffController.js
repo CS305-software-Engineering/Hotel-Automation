@@ -1,4 +1,4 @@
-const User = require('../../models/user')
+const User = require('../../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
@@ -14,17 +14,16 @@ function staffController(){
             //Validate request #TODO : yet to be implemented
             //show errors??
             if(!username || !email || !password){
-                return res.redirect('hotel/staff')
+                req.flash('Please fill all the fields');
+                return res.redirect('/staff')
             }
             //CHeck if email exists
             User.exists({ email: email }, (err, result) => {
                 if(result){
-                    console.log('Email already taken! Person already added');
                     req.flash('error','Email already taken! Person already added');
-                    return res.redirect('/hotel/staff')
+                    return res.redirect('/staff')
                 }
             })
-        
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database
@@ -35,10 +34,11 @@ function staffController(){
                 role:'staff'
             })
             user.save().then((user) => {
+                req.flash('Added Successfully');
                 return res.redirect('/manager')
             }).catch(err => {
-              //  console.log(err)
-                return res.redirect('/hotel/staff')
+                console.log(Error);
+                return res.redirect('/staff')
             })
             console.log(req.body);           
         }
