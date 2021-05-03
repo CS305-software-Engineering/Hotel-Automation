@@ -12,6 +12,9 @@ function initRoutes(app){
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
+     app.get('/display_menu', (req,res)=>{
+      res.render('customers/display_menu')
+    })
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
@@ -48,6 +51,9 @@ app.get('/completedorder', (req,res)=>{
 
 app.get('/rawmaterials', (req,res)=>{
   res.render('hotel/rawmaterials')
+})
+app.get('/addmenu', (req,res)=>{
+  res.render('hotel/addmenu')
 })
 
 
