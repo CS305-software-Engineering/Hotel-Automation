@@ -3,6 +3,7 @@ const authController = require('../app/http/controllers/authController')
 const homeController = require('../app/http/controllers/customers/homeController')
 const orderController = require('../app/http/controllers/customers/orderController')
 const staffController = require('../app/http/controllers/managers/staffController')
+const menuController = require('../app/http/controllers/managers/menuController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -62,9 +63,9 @@ app.get('/completedorder', (req,res)=>{
 app.get('/rawmaterials', (req,res)=>{
   res.render('hotel/rawmaterials')
 })
-app.get('/addmenu', (req,res)=>{
-  res.render('hotel/addmenu')
-})
+
+app.get('/menu', menuController().displayMenu)
+app.post('/menu', menuController().addMenu)
 
 
 }

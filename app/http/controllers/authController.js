@@ -72,7 +72,7 @@ function authController(){
             console.log(req.body);
             
         },
-        async postRegister_manager(req,res) {
+         async postRegister_manager(req,res) {
             //Logic
             const {hotelname,hoteladdr,managername, email, password} = req.body;
             //Validate request #TODO : yet to be implemented
@@ -81,48 +81,57 @@ function authController(){
                 return res.redirect('/manager_register')
             }
             //CHeck if email exists
+             //Hash password
+            const hashedPassword =  await bcrypt.hash(password, 10)
             User.exists({ email: email }, (err, result) => {
                 if(result){
                     req.flash('error','Email already taken! If already registered, please login!');
                     return res.redirect('/manager_register')
                 }
-            })
-             //CHeck if hotel exists
-             Hotel.exists({ hotelname: hotelname }, (err, result) => {
-                if(result){
-                    req.flash('error','Hotel already registered, please login!');
-                    return res.redirect('/manager_register')
+                else{
+                            //CHeck if hotel exists
+                    Hotel.exists({ hotelname: hotelname }, (err, result) => {
+                        if(result){
+                            req.flash('error','Hotel already registered, please login!');
+                            return res.redirect('/manager_register')
+                        }
+                        else{
+                                   
+                            //Create user in database
+                            const user = new User({
+                                username: managername,
+                                email: email,
+                                password: hashedPassword,
+                                role: 'manager'
+                            })
+                            user.save().then((user) => {
+                                const hotel = new Hotel({
+                                    hotelname: hotelname,
+                                    hoteladdr: hoteladdr,
+                                    manager: managername,
+                                    email: email,
+                                })
+                                hotel.save().then((hotel) => {
+                                    return res.redirect('/login')
+                                }).catch(err => {
+                                  console.log(err)
+                                    return res.redirect('/manager_register')
+                                })
+                                return res.redirect('/manager')
+                            }).catch(err => {
+                              console.log(err)
+                                return res.redirect('/manager_register')
+                            })
+
+                            // Save Hotel in database: yet to be implemented
+                            
+            
+                        }
+                    })
+                   
                 }
             })
-            //Hash password
-            const hashedPassword = await bcrypt.hash(password, 10)
-            //Create user in database
-            const user = new User({
-                username: managername,
-                email: email,
-                password: hashedPassword,
-                role: 'manager'
-            })
-            user.save().then((user) => {
-                return res.redirect('/manager')
-            }).catch(err => {
-              //  console.log(err)
-                return res.redirect('/manager_register')
-            })
-
-            //#TODO: Save Hotel in database: yet to be implemented
-            const hotel = new Hotel({
-                hotelname: hotelname,
-                hoteladdr: hoteladdr,
-                manager: managername,
-            })
-            hotel.save().then((hotel) => {
-                return res.redirect('/login')
-            }).catch(err => {
-              //  console.log(err)
-                return res.redirect('/manager_register')
-            })
-            
+             
         },
 
         logout(req,res){
