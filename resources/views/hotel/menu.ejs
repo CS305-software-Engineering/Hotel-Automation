@@ -30,15 +30,15 @@
   <tbody>
           <% menu.forEach(function(menuItems) { %>
             <tr>
-             <th scope="row"><%= menuItems.item %></th>
+             <th class="item" scope="row"><%= menuItems.item %></th>
               <td>Rs. <%= menuItems.price %></td>
               <td><%= menuItems.ingredients %></td>
               <td><%= menuItems.recipe %></td>
               <td>
-                <a class="btn btn-warning" href="#">
+                <a class="btn btn-warning editbutton" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever='{ "id" : "<%= menuItems._id %>", "item" : "<%= menuItems.item %>", "price" : "<%= menuItems.price %>", "ingredients" : "<%= menuItems.ingredients %>", "recipe" : "<%= menuItems.recipe %>"}' >
                   <i class="fas fa-edit"></i>&nbsp;Edit
                 </a>
-                <a class="btn btn-danger" href="#">
+                <a class="btn btn-danger" href="/menu/delete/<%= menuItems._id %>">
                   <i class="far fa-trash-alt"></i>&nbsp;Delete
                 </a>
               </td>
@@ -46,9 +46,6 @@
           <% }) %>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
 
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -58,28 +55,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/menu/edit" method="POST" id="editmenu">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Item id</label>
+            <input type="text" class="form-control" id="itemid" name="itemid" readonly>
+          </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Item:</label>
             <input type="text" class="form-control" id="item" name="item">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Price:</label>
-            <input type="number" class="form-control" id="recipient-name">
+            <input type="number" class="form-control" id="recipient-name" name="price">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Ingredients:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="text" class="form-control" id="recipient-name" name="ingredients">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Recipe:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" id="message-text" name="recipe"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" form="editmenu">Save changes</button>
       </div>
     </div>
   </div>
@@ -87,7 +88,7 @@
 
 <!---Add button-->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addModal" style="position: fixed;top:10%;right:0;font-size: larger;">
   Add new item
 </button>
 
@@ -126,26 +127,31 @@
     </div>
   </div>
 </div>
+
+
+
 <script>
   var exampleModal = document.getElementById('editModal')
 exampleModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
   var button = event.relatedTarget
   // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
+  var recipient = JSON.parse(button.getAttribute('data-bs-whatever'))
+  var itemName = $(this).parent('tr').find('th.item').text();
+  var modalBodyItemId = exampleModal.querySelector('input[name="itemid"]')
   var modalBodyItem = exampleModal.querySelector('input[name="item"]')
-  var modalBodyInput = exampleModal.querySelector('.modal-body input')
-  var modalBodyInput = exampleModal.querySelector('.modal-body textarea')
+  var modalBodyPrice = exampleModal.querySelector('input[name="price"]')
+  var modalBodyIngredients = exampleModal.querySelector('input[name="ingredients"]')
+  var modalBodyRecipe = exampleModal.querySelector('.modal-body textarea')
 
  // modalTitle.textContent = 'New message to ' + recipient
- modalBodyItem.value = recipient
+ modalBodyItemId.value = recipient['id']
+ modalBodyItem.value = recipient['item']
+ modalBodyPrice.value = recipient['price']
+ modalBodyIngredients.value = recipient['ingredients']
+ modalBodyRecipe.value = recipient['recipe']
+});
 
-  modalBodyInput.value = recipient
-})
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>

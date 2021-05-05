@@ -66,6 +66,8 @@ app.get('/rawmaterials', (req,res)=>{
 
 app.get('/menu', menuController().displayMenu)
 app.post('/menu', menuController().addMenu)
+app.post('/menu/edit', menuController().editMenu)
+app.get('/menu/delete/:id', menuController().deleteMenu)
 
 
 }

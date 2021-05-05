@@ -5,7 +5,7 @@ function menuController(){
     return {
         //read
         async displayMenu(req,res) {
-            const hotel = await Hotel.find({email: req.user.email})
+            const hotel = await Hotel.findOne({email: req.user.email})
             const menu = await Menu.find({hotelname: hotel.hotelname})
             console.log(menu)
             return res.render('hotel/menu', {menu: menu})
@@ -14,9 +14,10 @@ function menuController(){
         async addMenu(req,res) {
             //Logic
             const {item, price, ingredients, recipe} = req.body;
-            const hotel = await Hotel.find({email: req.user.email})
-            const hotelName = hotel.hotelName
-      
+            const hotel = await Hotel.findOne({email: req.user.email})
+            const hotelName = hotel.hotelname
+        //    console.log(hotelName)
+         //   console.log(req.user)
             //Create user in database
             const menu = new Menu({
                 hotelname: hotelName,
@@ -31,14 +32,26 @@ function menuController(){
                 console.log(err)
                 return res.redirect('/menu')
             })
-            console.log(req.body);
+          //  console.log(req.body);
             
           //  console.log(req.user)
             //console.log(req.body)
          
 
          // console.log(hotel)
+        //    return res.redirect('/menu')
+        },
+        async deleteMenu(req,res) {
+            const id = req.params.id
+            await Menu.findByIdAndRemove(id).exec()
             return res.redirect('/menu')
+           // res.render('hotel/menu')
+        },
+        async editMenu(req,res) {
+            const {itemid, item, price, ingredients, recipe} = req.body;
+            await Menu.findByIdAndUpdate(itemid, {item: item, price: price, ingredients: ingredients, recipe: recipe}).exec()
+            return res.redirect('/menu')
+           // res.render('hotel/menu')
         },
         
     }
