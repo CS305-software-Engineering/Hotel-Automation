@@ -3,6 +3,7 @@ const authController = require('../app/http/controllers/authController')
 const homeController = require('../app/http/controllers/customers/homeController')
 const orderController = require('../app/http/controllers/customers/orderController')
 const staffController = require('../app/http/controllers/managers/staffController')
+const menuController = require('../app/http/controllers/managers/menuController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -13,6 +14,9 @@ function initRoutes(app){
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
+     app.get('/display_menu', (req,res)=>{
+      res.render('customers/display_menu')
+    })
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
@@ -59,6 +63,11 @@ app.get('/completedorder', (req,res)=>{
 app.get('/rawmaterials', (req,res)=>{
   res.render('hotel/rawmaterials')
 })
+
+app.get('/menu', menuController().displayMenu)
+app.post('/menu', menuController().addMenu)
+app.post('/menu/edit', menuController().editMenu)
+app.get('/menu/delete/:id', menuController().deleteMenu)
 
 
 }

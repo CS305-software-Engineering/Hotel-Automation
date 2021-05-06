@@ -24,11 +24,6 @@ mongoose.connect(url,
 });
 const connection = mongoose.connection;
 
-//Passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
-app.use(passport.initialize())
-app.use(passport.session())
 //Session store
 let mongoStore = MongoDbStore.create({
                         mongoUrl: url,
@@ -43,6 +38,14 @@ app.use(session({
     saveUninitialized: false,
     cookie: {maxAge: 1000 * 60 * 60 * 24}
 }))
+
+
+//Passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
 //Assets
  app.use(flash())
  app.use(express.static('public'))
@@ -50,7 +53,11 @@ app.use(session({
  app.use(express.json())
  require('./routes/web')(app)
 
-
+app.use((req, res, next) => {
+    res.locals.session = req.session
+    res.locals.user = req.user
+    next()
+})
 app.listen(PORT, () => {
    console.log(`Listening on port ${PORT}`)
 })
