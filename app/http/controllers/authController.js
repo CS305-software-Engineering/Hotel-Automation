@@ -1,8 +1,12 @@
 const User = require('../../models/user')
 const Hotel = require('../../models/hotel')
-
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandboxe9a03327bcbd4f01aac092dcb2f85fed.mailgun.org';
+const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
 
 function authController(){
     return {
@@ -55,6 +59,30 @@ function authController(){
                     return res.redirect('/u_register')
                 }
             })
+
+            const token = jwt.sign({name,email,password}, process.env.JWT_ACC_ACTIVATE,{expiresIn:'20m'});
+
+            // Email Verification
+            const data = {
+                from: 'noreply@hello.com',
+                to: email,
+                subject: 'Account Activation Link',
+                html: `
+                    <h2> Please click on the given link to activate your account </h2>
+                    <p>${process.env.CLIENT_URL}/authentication/activate/${token} </p>
+                    `
+            };
+            mg.messages().send(data, function (error, body) {
+                if(error){
+                    return res.json({
+                        error: err.message
+                    })
+                }
+                return res.json({message:'Email has been sent, kindly activate your account'})
+                console.log(body);
+            });
+
+
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database
@@ -132,4 +160,18 @@ function authController(){
     }
 }
 
+exports.activateAccount = (req,res) => {
+    const {token} = req.body;
+    if(token){
+        jwt.verify(token,process.env.JWT_ACC_ACTIVATE, function(err,decodedToken){
+            if(err){
+                return res.status(400).json({error: 'Incorrect or Expired link.'})
+            }
+            const {name,email,password }= decodedToken;
+        })
+    }
+    else{
+        return res.json({error: "Something went wrong!!!"})
+    }
+}
 module.exports = authController
