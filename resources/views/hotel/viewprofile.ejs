@@ -1,4 +1,4 @@
-const User = require('../../../app/models/user')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@ div.content{
   <div class="main"> 
    
        <form>
-        <h2 class="labels">Manager's Name : <%= User.username %> </h2> 
+        <h2 class="labels">Manager's Name : req.user.username </h2> 
 
         <h2 class="labels">Hotel Name : <h2 class="labels"> </h2></h2> 
         

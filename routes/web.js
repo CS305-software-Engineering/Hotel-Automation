@@ -4,6 +4,7 @@ const homeController = require('../app/http/controllers/customers/homeController
 const orderController = require('../app/http/controllers/customers/orderController')
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
+const guest = require('../app/http/middlewares/guest')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -18,17 +19,17 @@ function initRoutes(app){
       res.render('customers/display_menu')
     })
      
-     app.get('/u_register', authController().register_customer)
+     app.get('/u_register',guest,authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
-     app.get('/manager_register', authController().register_manager)
+     app.get('/manager_register', guest,authController().register_manager)
      app.post('/manager_register', authController().postRegister_manager)
-     app.get('/login', authController().login)
+     app.get('/login',guest, authController().login)
      app.post('/login', authController().postLogin)
      app.post('/logout',authController().logout)
      app.get('/staff', staffController().register_staff)
      app.post('/staff', staffController().postRegister_staff)
 
-     app.post('/orders',orderController().store)
+    app.post('/orders',orderController().store)
 
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
@@ -37,7 +38,7 @@ function initRoutes(app){
 app.get('/managerhome', (req,res)=>{
   res.render('hotel/managerhome')
 })
-app.get('/staff', (req,res)=>{
+app.get('/staff',(req,res)=>{
   res.render('hotel/staff')
 })
 app.get('/viewprofile', (req,res)=>{
@@ -68,7 +69,6 @@ app.get('/menu', menuController().displayMenu)
 app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
-
 
 }
 
