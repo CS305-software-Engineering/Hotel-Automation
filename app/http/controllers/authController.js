@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
-const mailgun = require("mailgun-js");
-const DOMAIN = 'sandboxe9a03327bcbd4f01aac092dcb2f85fed.mailgun.org';
-const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
+//const mailgun = require("mailgun-js");
+//const DOMAIN = 'sandboxe9a03327bcbd4f01aac092dcb2f85fed.mailgun.org';
+//const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
 
 function authController(){
     return {
@@ -46,9 +46,13 @@ function authController(){
         },
         async postRegister_customer(req,res) {
             //Logic
-            const {username, email, password} = req.body;
+            const {username, email, password,cPassword} = req.body;
             //Validate request 
-            if(!username || !email || !password ){
+            if(!username || !email || !password || !cPassword ){
+                return res.redirect('/u_register')
+            }
+            if( password != cPassword){
+                req.flash("Password does not match");
                 return res.redirect('/u_register')
             }
             //CHeck if email exists
