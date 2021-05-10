@@ -117,7 +117,7 @@ function authController(){
                                   console.log(err)
                                     return res.redirect('/manager_register')
                                 })
-                                return res.redirect('/manager')
+                              //  return res.redirect('/manager')
                             }).catch(err => {
                               console.log(err)
                                 return res.redirect('/manager_register')
