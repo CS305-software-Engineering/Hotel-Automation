@@ -2,9 +2,10 @@ const indexController = require('../app/http/controllers/indexController')
 const authController = require('../app/http/controllers/authController')
 const homeController = require('../app/http/controllers/customers/homeController')
 const orderController = require('../app/http/controllers/customers/orderController')
+const userController = require('../app/http/controllers/customers/userController')
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
-const cartController = require('../app/http/controllers/customers/cartController')
+//const cartController = require('../app/http/controllers/customers/cartController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -13,7 +14,7 @@ function initRoutes(app){
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
-     app.get('/display_menu/:hotelname', homeController().displayMenu)
+     //app.get('/display_menu/:hotelname', homeController().displayMenu)
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
@@ -66,8 +67,11 @@ app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
 
-app.get('/cart', cartController().index)
-app.get('/update-cart', cartController().update)
+app.post('/change_password', userController().changePassword);
+app.get('/changePassword', userController().renderchangePassword);
+
+//app.get('/cart', cartController().index)
+//app.get('/update-cart', cartController().update)
 
 }
 
