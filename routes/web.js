@@ -4,12 +4,11 @@ const homeController = require('../app/http/controllers/customers/homeController
 const orderController = require('../app/http/controllers/customers/orderController')
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
+const cartController = require('../app/http/controllers/customers/cartController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
-     app.get('/cart', (req,res)=>{
-        res.render('customers/cart')
-     })
+     
      app.get('/u_home', homeController().index)
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
@@ -67,6 +66,8 @@ app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
 
+app.get('/cart', cartController().index)
+app.post('/update-cart', cartController().update)
 
 }
 

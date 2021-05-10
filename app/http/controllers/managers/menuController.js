@@ -7,7 +7,8 @@ function menuController(){
         async displayMenu(req,res) {
             const hotel = await Hotel.findOne({email: req.user.email})
             const menu = await Menu.find({hotelname: hotel.hotelname})
-            console.log(menu)
+            if(menu == null)
+            console.log("menu is null")
             return res.render('hotel/menu', {menu: menu})
            // res.render('hotel/menu')
         },

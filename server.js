@@ -51,13 +51,17 @@ app.use(passport.session())
  app.use(express.static('public'))
  app.use(express.urlencoded({extended : false}))
  app.use(express.json())
- require('./routes/web')(app)
 
-app.use((req, res, next) => {
+ app.use((req, res, next) => {
     res.locals.session = req.session
     res.locals.user = req.user
     next()
 })
+
+
+ require('./routes/web')(app)
+
+
 app.listen(PORT, () => {
    console.log(`Listening on port ${PORT}`)
 })
