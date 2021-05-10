@@ -2,6 +2,7 @@ const indexController = require('../app/http/controllers/indexController')
 const authController = require('../app/http/controllers/authController')
 const homeController = require('../app/http/controllers/customers/homeController')
 const orderController = require('../app/http/controllers/customers/orderController')
+const userController = require('../app/http/controllers/customers/userController')
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
@@ -65,6 +66,9 @@ app.get('/menu', menuController().displayMenu)
 app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
+
+app.post('/change_password', userController().changePassword);
+app.get('/changePassword', userController().renderchangePassword);
 
 app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
