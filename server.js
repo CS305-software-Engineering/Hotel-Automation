@@ -47,17 +47,21 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //Assets
-app.use(flash())
-app.use(express.static('public'))
-app.use(express.urlencoded({extended : false}))
-app.use(express.json())
-require('./routes/web')(app)
+ app.use(flash())
+ app.use(express.static('public'))
+ app.use(express.urlencoded({extended : false}))
+ app.use(express.json())
 
-app.use((req, res, next) => {
-   res.locals.session = req.session
-   res.locals.user = req.user
-   next()
+ app.use((req, res, next) => {
+    res.locals.session = req.session
+    res.locals.user = req.user
+    next()
 })
+
+
+ require('./routes/web')(app)
+
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
 })
