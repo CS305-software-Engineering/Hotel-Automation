@@ -15,6 +15,8 @@ function initRoutes(app){
        res.render('customers/u_hotel')
      })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
+     app.get('/previous_orders', orderController().displayOrder)
+
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)

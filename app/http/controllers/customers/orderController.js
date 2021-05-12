@@ -68,8 +68,18 @@ function orderController () {
                 return res.render('customers/singleOrder', { order })
             }
             return  res.redirect('/')
-        }
+        },
+        async displayOrder(req,res) {
+            const orders = await Order.find({
+                "customerId": { $eq: req.user._id }
+              })
+            if(orders == null)
+            return console.log("No order yet")
+            return res.render('customers/previous_orders', {orders: orders})
+           // res.render('hotel/menu')
+        },
     }
+    
 }
 
 module.exports = orderController

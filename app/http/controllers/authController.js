@@ -1,8 +1,13 @@
 const User = require('../../models/user')
 const Hotel = require('../../models/hotel')
 
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandboxd8cc64315fe24bb9b0ee43aaabc9ccaf.mailgun.org';
+const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
 
 function authController(){
     return {
@@ -55,6 +60,27 @@ function authController(){
                     return res.redirect('/u_register')
                 }
             })
+
+            const token = jwt.sign({username,email,password},process.env.JWT_ACC_ACTIVATE,{expiresIn: '20m'});
+
+            // email verification
+            const data = {
+                from: 'noreply@hello.com',
+                to: email,
+                subject: 'Account Activation Link',
+                html:`
+                    <h2> Please click on given link to activate your account</h2>
+                    <p>${process.env.CLIENT_URL}/authenthication/activate/${token} </p>
+            `};
+          //  mg.messages().send(data, function (error, body) {
+           //     if(error){
+            //        res.sendStatus(500);
+            //        return;
+            //    }
+            //    return res.json({ message: 'Email has been sent successfully :)'})
+            //    console.log(body);
+         //   });
+
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database
