@@ -27,13 +27,14 @@ function staffController(){
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database
-            const user = new User({
+            const user1 = new User({
                 username: username,
                 email: email,
                 password: hashedPassword,
-                role:'staff'
+                role:'staff',
+                added_by: req.user._id
             })
-            user.save().then((user) => {
+            user1.save().then((user) => {
                 req.flash('Added Successfully');
                 return res.redirect('/manager')
             }).catch(err => {
@@ -41,7 +42,30 @@ function staffController(){
                 return res.redirect('/staff')
             })
             console.log(req.body);           
-        }
+        },
+
+        async displayStaff(req,res) {
+            const users = await User.find({
+                $and: [
+                    { "role": { $eq: "staff" }},
+                     // change later to completed
+                     {"added_by" :{$eq: req.user._id} },
+                  ]
+            })
+            if(users == null)
+                return console.log("No order yet")
+            console.log(users)
+            return res.render('hotel/staff_list', {users: users})
+           // res.render('hotel/menu')
+        },
+
+        // yet to implement
+        async deleteStaff(req,res) {
+            const id = req.params.id
+            await Menu.findByIdAndRemove(id).exec()
+            return res.redirect('hotel/staff_list')
+           // res.render('hotel/menu')
+        },
     }
 }
 

@@ -6,6 +6,7 @@ const userController = require('../app/http/controllers/customers/userController
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
+const ordersController = require('../app/http/controllers/managers/ordersController')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -16,7 +17,8 @@ function initRoutes(app){
      })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
      app.get('/previous_orders', orderController().displayOrder)
-
+     app.get('/completed_orders', ordersController().displayOrder)
+     
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
@@ -27,6 +29,7 @@ function initRoutes(app){
      app.post('/logout',authController().logout)
      app.get('/staff', staffController().register_staff)
      app.post('/staff', staffController().postRegister_staff)
+     app.get('/staff_list', staffController().displayStaff)
 
      app.post('/orders',orderController().store)
 

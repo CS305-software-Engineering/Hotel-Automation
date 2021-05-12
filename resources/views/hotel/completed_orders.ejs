@@ -20,16 +20,25 @@ font-family: san-serif;
     <table class="container table table-hover" style="margin-top: 100px;font-size:x-large">
         <thead>
           <tr>
-            <th scope="col">Staff Name</th>
-            <th scope="col">Staff Email-Id</th>
+            <th scope="col">Order-Items</th>
+            <th scope="col">Customer-Id</th>
+            <th scope="col">Payment-Type</th>
+            <th scope="col">Instructions</th>
+            <th scope="col">Phone-No</th>
+            <th scope="col">Addresss</th>
             
           </tr>
         </thead>
         <tbody>
-            <% users.forEach(function(user) { %>
+            <% orders.forEach(function(order) { %>
                 <tr>
-                   <td class="item" scope="row"><%= user.username %></td>
-                    <td> <%= user.email %></td>
+                    Hi
+                    <td class="item" scope="row"><%= order.items %></td>
+                    <td> <%= order.customerId %></td>
+                    <td> <%= order.paymentType %></td>
+                    <td> <%= order.instructions %></td>
+                    <td> <%= order.phone %></td>
+                    <td> <%= order.address %></td>
                  </tr>
                 <% }) %>
         </tbody>   

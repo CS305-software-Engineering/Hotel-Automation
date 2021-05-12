@@ -14,6 +14,7 @@ const orderSchema = new Schema({
     paymentType: { type: String, default: 'COD'},
     paymentStatus: { type: Boolean, default: false },
     status: { type: String, default: 'order_placed'},
+    Date: {type: String, default: new Date().toISOString().slice(0,10)}
 }, { timestamps: true })
 
 module.exports = mongoose.model('Order', orderSchema)
