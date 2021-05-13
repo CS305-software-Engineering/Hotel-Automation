@@ -1,5 +1,5 @@
 const Order = require('../../../models/order')
-//const moment = require('moment')
+const moment = require('moment')
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 
 function orderController () {
@@ -70,13 +70,11 @@ function orderController () {
             return  res.redirect('/')
         },
         async displayOrder(req,res) {
-            const orders = await Order.find({
-                "customerId": { $eq: req.user._id }
-              })
-            if(orders == null)
-            return console.log("No order yet")
-            return res.render('customers/previous_orders', {orders: orders})
-           // res.render('hotel/menu')
+           const orders = await Order.find({ customerId: req.user._id },
+            null,
+            { sort: { 'createdAt': -1 } } )
+        res.header('Cache-Control', 'no-store')
+        res.render('customers/previous_orders', { orders: orders, moment: moment })
         },
     }
     
