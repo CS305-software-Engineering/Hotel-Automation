@@ -78,14 +78,11 @@ app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
 
-<<<<<<< HEAD
 app.post('/orders',orderController().store)
 app.get('/customer/orders',orderController().index)
 
 
-=======
 app.get('/neworders',ordersController().index)
->>>>>>> 0f6832b28708657b259c5b5dddba744acc65b226
 }
 
 module.exports = initRoutes
