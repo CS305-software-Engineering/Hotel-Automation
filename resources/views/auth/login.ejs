@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -35,11 +36,33 @@ window.onload = init;
         <% }%>
         <h2 class="labels">Email id</h2> 
         <input id="email" class="inputfield" type="text" name="email" value="" required>
+        
         <h2 class="labels">Password</h2> 
         <input id="password" class="inputfield" type="password" name="password" value="" required>
+        <span style = "position: absolute"  class = "eye" onclick = "myfunction()"><i style = "display:none" id = "hide1" class="fa fa-eye"></i><i  id = "hide2" class="fa fa-eye-slash"></i></span>
         <input class="button" type="submit" name="login" value="Login">        
     </form>
 </div>
 </div>  
+<script>
+   
+    function myfunction(){
+       var x = document.getElementById("password")
+       var y = document.getElementById("hide1")
+       var z = document.getElementById("hide2")
+
+       if( x.type === 'password'){
+           x.type = "text";
+           y.style.display = "block";
+           z.style.display = "none";
+       }
+
+       else{
+           x.type = "password";
+           y.style.display = "none";
+           z.style.display = "block";
+       }
+    }
+</script>
 </body>
 </html>
