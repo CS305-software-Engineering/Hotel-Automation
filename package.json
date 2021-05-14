@@ -27,6 +27,8 @@
     "jest": "^26.6.3",
     "mongodb-memory-server": "^6.9.6",
     "mongoose": "^5.12.7",
+    "nodemailer": "^6.6.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
