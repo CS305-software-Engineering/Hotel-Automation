@@ -78,6 +78,7 @@ app.get('/changePassword', userController().renderchangePassword);
 app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 
+app.get('/neworders',ordersController().index)
 }
 
 module.exports = initRoutes
