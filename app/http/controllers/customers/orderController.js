@@ -5,7 +5,7 @@ const moment = require('moment')
 function orderController () {
     return {
         store(req, res) {
-            const { instructions, phone, address, stripeToken, paymentType } = req.body
+            const { paymentType, instructions, phone, address } = req.body
             if(!phone || !address) {
                 return res.status(422).json({ message : 'All fields are required' });
             }
@@ -15,9 +15,21 @@ function orderController () {
                 items: req.session.cart.items,
                 instructions,
                 phone,
-                address
+                address,
+                paymentType,
             })
             order.save().then(result => {
+                req.flash('success','Order placed successfully')
+                console.log('Saved....')
+                return res.redirect('/u_home')
+            }).catch(err => {
+                req.flash('error','Something went wrong')
+                console.log('Not saved....')
+                console.log(err)
+                return res.redirect('/cart')
+            })
+
+          /*  order.save().then(result => {
                 Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
                     // req.flash('success', 'Order placed successfully')
 
@@ -52,7 +64,7 @@ function orderController () {
                 })
             }).catch(err => {
                 return res.status(500).json({ message : 'Something went wrong' });
-            })
+            })*/
         },
         async index(req, res) {
             const orders = await Order.find({ customerId: req.user._id },

@@ -31,8 +31,6 @@ function initRoutes(app){
      app.post('/staff', staffController().postRegister_staff)
      app.get('/staff_list', staffController().displayStaff)
 
-     app.post('/orders',orderController().store)
-
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
       }) 
@@ -79,6 +77,10 @@ app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
+
+app.post('/orders',orderController().store)
+app.get('/customer/orders',orderController().index)
+
 
 }
 
