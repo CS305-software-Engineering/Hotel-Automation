@@ -70,11 +70,3 @@ app.listen(PORT, () => {
 app.use(expressLayout)
 app.set('views', path.join(__dirname, '/resources/views'))
 app.set('view engine', 'ejs')
-
-
-
-
-
-
-
-

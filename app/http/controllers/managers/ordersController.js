@@ -17,7 +17,17 @@ function ordersController () {
             return res.render('hotel/completed_orders', {orders: orders})
            // res.render('hotel/menu')
         },
-    }
-}
+
+        index(req, res) {
+            order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => {
+                if(req.xhr) {
+                    return res.json(orders)
+                } else {
+                 return res.render('hotel/neworders')
+                }
+            })
+         }
+     }
+ }
 
 module.exports = ordersController

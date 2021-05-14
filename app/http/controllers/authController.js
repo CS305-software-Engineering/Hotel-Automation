@@ -5,9 +5,6 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
-const mailgun = require("mailgun-js");
-const DOMAIN = 'sandboxd8cc64315fe24bb9b0ee43aaabc9ccaf.mailgun.org';
-const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
 
 function authController(){
     return {

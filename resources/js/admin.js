@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previous Orders</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/7140f4f7d5.js" crossorigin="anonymous"></script>
- <style>
-     body { 
-background-position: center; 
-background-size: cover; 
-font-family: san-serif;
-}
- </style>
-</head>
-<body>
-  
-
-    <table class="container table table-hover" style="margin-top: 100px;font-size:x-large">
-        <thead>
-          <tr>
-            <th class="px-4 py-2 text-left">Orders</th>
-                <th class="px-4 py-2 text-left">Customer</th>
-                <th class="px-4 py-2 text-left">Address</th>
-                <th class="px-4 py-2 text-left">status</th>
-                <th class="px-4 py-2 text-left">Placed at</th>
-                <th class="px-4 py-2 text-left">Payment Status</th>
-
-          </tr>
-        </thead>
-        <tbody id="orderTableBody" >
-        
-            <span style = "position: absolute"  class = "eye" onclick = "initAdmin()"><i style = "display:none" id = "hide1" class="fa fa-eye"></i><i  id = "hide2" class="fa fa-eye-slash"></i></span>
-          
-        </tbody>
-    </table>
-
-<script>
 import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
 
-  function initAdmin() {
-      console.log("hi")
+function initAdmin() {
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -59,7 +18,7 @@ import Noty from 'noty'
     }).catch(err => {
         console.log(err)
     })
-  }
+
     function renderItems(items) {
         let parsedItems = Object.values(items)
         return parsedItems.map((menuItem) => {
@@ -67,7 +26,7 @@ import Noty from 'noty'
                 <p>${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
             `
         }).join('')
-    }
+      }
 
     function generateMarkup(orders) {
         return orders.map(order => {
@@ -132,13 +91,6 @@ import Noty from 'noty'
     //     orderTableBody.innerHTML = ''
     //     orderTableBody.innerHTML = generateMarkup(orders)
     // })
-    
-</script>
-</body>
-</html>
+}
 
-
-    
-        
-        
-
+module.export = initAdmin
