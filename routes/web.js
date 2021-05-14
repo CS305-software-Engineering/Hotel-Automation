@@ -77,6 +77,8 @@ app.get('/changePassword', userController().renderchangePassword);
 
 app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
+app.post('/delete-cart', cartController().delete)
+app.get('/cart/delete/:id', cartController().deleteitem)
 
 app.get('/neworders',ordersController().index)
 }
