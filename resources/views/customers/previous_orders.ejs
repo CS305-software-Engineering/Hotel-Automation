@@ -26,6 +26,7 @@ font-family: san-serif;
             <th scope="col">Address</th>
             <th scope="col">Date</th>
             <th scope="col">Time</th>
+            <th scope="col">Reorder</th>
 
           </tr>
         </thead>
@@ -38,6 +39,9 @@ font-family: san-serif;
                     <td><%= order.address %></td>
                     <td><%= order.Date %></td>
                     <td><%= moment(order.createdAt).format('hh:mm A') %></td>
+                    <td> <a class="btn btn-danger" href="/previous_orders/reorder/<%= order._id %>">
+                      <i class="far fa-cart"></i>&nbsp;Reorder
+                    </a> </td>
                  </tr>
                 <% }) %>
         <% } else { %>

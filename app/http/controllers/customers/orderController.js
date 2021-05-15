@@ -2,7 +2,17 @@ const Order = require('../../../models/order')
 const moment = require('moment')
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 
-function orderController () {
+function renderItems(items) {
+    let parsedItems = Object.values(items)
+    return parsedItems.map((menuItem) => {
+        console.log(menuItem.item)
+        console.log(menuItem.qty)
+        for(var i = 0 ; i < menuItem.qty ; i++)
+            updateCart(menuitem.item);
+    })
+  }
+  
+  function orderController () {
     return {
         store(req, res) {
             const { instructions, phone, address, stripeToken, paymentType } = req.body
@@ -76,6 +86,16 @@ function orderController () {
         res.header('Cache-Control', 'no-store')
         res.render('customers/previous_orders', { orders: orders, moment: moment })
         },
+
+        async reorder(req,res) {
+            const id = req.params.id
+            const order = await Order.find({ _id: id },
+             null,)
+           // console.log(order.items)
+            renderItems(order.items)   
+         //res.header('Cache-Control', 'no-store')
+         // res.render('customers/previous_orders', { orders: orders, moment: moment })
+         },
     }
     
 }

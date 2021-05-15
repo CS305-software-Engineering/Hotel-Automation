@@ -62,8 +62,8 @@ function staffController(){
         // yet to implement
         async deleteStaff(req,res) {
             const id = req.params.id
-            await Menu.findByIdAndRemove(id).exec()
-            return res.redirect('hotel/staff_list')
+            await User.findByIdAndRemove(id).exec()
+            return res.redirect('/staff_list')
            // res.render('hotel/menu')
         },
     }

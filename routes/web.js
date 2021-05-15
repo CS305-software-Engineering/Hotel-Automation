@@ -30,7 +30,8 @@ function initRoutes(app){
      app.get('/staff', staffController().register_staff)
      app.post('/staff', staffController().postRegister_staff)
      app.get('/staff_list', staffController().displayStaff)
-
+     app.get('/staff_list', staffController().displayStaff)
+     
      app.post('/orders',orderController().store)
 
       app.get('/manager', (req,res)=>{
@@ -71,6 +72,8 @@ app.get('/menu', menuController().displayMenu)
 app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
+app.get('/staff_list/delete/:id', staffController().deleteStaff)
+app.get('/previous_orders/reorder/:id', orderController().reorder)
 
 app.post('/change_password', userController().changePassword);
 app.get('/changePassword', userController().renderchangePassword);
