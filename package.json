@@ -18,16 +18,11 @@
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.2.0",
     "cross-env": "^7.0.3",
-<<<<<<< Updated upstream
     "dotenv": "^9.0.2",
-=======
-    "dotenv": "^8.2.0",
->>>>>>> Stashed changes
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "^0.0.2",
-<<<<<<< Updated upstream
     "express-jwt": "^6.0.0",
     "express-session": "^1.17.1",
     "express-validator": "^6.11.1",
@@ -39,12 +34,6 @@
     "mongoose": "^5.12.7",
     "nodemailer": "^6.6.0",
     "nodemailer-sendgrid": "^1.0.3",
-=======
-    "express-session": "^1.17.1",
-    "jest": "^26.6.3",
-    "mongodb-memory-server": "^6.9.6",
-    "mongoose": "^5.12.7",
->>>>>>> Stashed changes
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
