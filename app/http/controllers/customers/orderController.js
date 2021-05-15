@@ -83,7 +83,7 @@ const moment = require('moment')
             if(req.user._id.toString() === order.customerId.toString()) {
                 return res.render('customers/singleOrder', { order })
             }
-            return  res.redirect('/')
+            return  res.redirect('/u_home')
         },
         async displayOrder(req,res) {
            const orders = await Order.find({ customerId: req.user._id },

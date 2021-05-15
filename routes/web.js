@@ -7,6 +7,8 @@ const staffController = require('../app/http/controllers/managers/staffControlle
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
 const AdminOrderController = require('../app/http/controllers/managers/orderController')
+const statusController = require('../app/http/controllers/managers/statusController')
+
 //middlewares
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
@@ -88,12 +90,13 @@ app.post('/reorder', cartController().reorder)
 
 app.post('/orders', auth, orderController().store)
 app.get('/customer/orders', auth, orderController().index)
+app.get('/customer/orders/:id', auth, orderController().show)
 
 
+//Manager routes
 app.get('/manager/orders', manager, AdminOrderController().index)
+app.post('/manager/order/status', manager, statusController().update)
 
-//Admin routes
-//app.get('/admin/orders', auth, AdminOrderController().index)
 
 }
 
