@@ -8,6 +8,8 @@ const menuController = require('../app/http/controllers/managers/menuController'
 const cartController = require('../app/http/controllers/customers/cartController')
 const ordersController = require('../app/http/controllers/managers/ordersController')
 
+const guest = require('../app/http/middlewares/guest')
+
 function initRoutes(app){
      app.get('/', indexController().index)
      
@@ -15,6 +17,9 @@ function initRoutes(app){
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
+     app.get('/staff_home', (req,res)=>{
+      res.render('hotel/staff_home')
+    })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
      app.get('/previous_orders', orderController().displayOrder)
      app.get('/completed_orders', ordersController().displayOrder)
@@ -25,17 +30,14 @@ function initRoutes(app){
      app.get('/manager_register', authController().register_manager)
      app.post('/manager_register', authController().postRegister_manager)
      app.get('/login', authController().login)
-     app.post('/login', authController().postLogin)
+     app.post('/login',authController().postLogin)
      app.post('/logout',authController().logout)
      app.get('/staff', staffController().register_staff)
      app.post('/staff', staffController().postRegister_staff)
      app.get('/staff_list', staffController().displayStaff)
-<<<<<<< HEAD
      app.get('/staff_list', staffController().displayStaff)
      
      app.post('/orders',orderController().store)
-=======
->>>>>>> 82f290d0b98ea56fbd2a973fd65da0418f3a6b56
 
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
@@ -76,7 +78,6 @@ app.post('/menu', menuController().addMenu)
 app.post('/menu/edit', menuController().editMenu)
 app.get('/menu/delete/:id', menuController().deleteMenu)
 app.get('/staff_list/delete/:id', staffController().deleteStaff)
-app.get('/previous_orders/reorder/:id', orderController().reorder)
 
 app.post('/change_password', userController().changePassword);
 app.get('/changePassword', userController().renderchangePassword);
