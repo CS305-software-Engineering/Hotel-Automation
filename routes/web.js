@@ -7,8 +7,17 @@ const userController = require('../app/http/controllers/customers/userController
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
-const ordersController = require('../app/http/controllers/managers/ordersController')
+const AdminOrderController = require('../app/http/controllers/managers/orderController')
+const statusController = require('../app/http/controllers/managers/statusController')
 
+<<<<<<< HEAD
+=======
+//middlewares
+const guest = require('../app/http/middlewares/guest')
+const auth = require('../app/http/middlewares/auth')
+const manager = require('../app/http/middlewares/manager')
+
+>>>>>>> 1ec467e3701b61473fbed0eab46cdce444f5d62c
 function initRoutes(app){
      app.get('/', indexController().index)
      
@@ -18,7 +27,7 @@ function initRoutes(app){
      })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
      app.get('/previous_orders', orderController().displayOrder)
-     app.get('/completed_orders', ordersController().displayOrder)
+     app.get('/completed_orders', AdminOrderController().displayOrder)
      
      
      app.get('/u_register', authController().register_customer)
@@ -51,10 +60,6 @@ app.get('/viewprofile', (req,res)=>{
   res.render('hotel/viewprofile')
 })
 
-app.get('/neworders', (req,res)=>{
-  res.render('hotel/neworders')
-})
-
 app.get('/addstaff', (req,res)=>{
   res.render('hotel/addstaff')
 })
@@ -85,11 +90,19 @@ app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
+app.post('/reorder', cartController().reorder)
 
-app.post('/orders',orderController().store)
-app.get('/customer/orders',orderController().index)
+app.post('/orders', auth, orderController().store)
+app.get('/customer/orders', auth, orderController().index)
+app.get('/customer/orders/:id', auth, orderController().show)
 
 
+//Manager routes
+app.get('/manager/orders', manager, AdminOrderController().index)
+app.post('/manager/order/status', manager, statusController().update)
+
+
+<<<<<<< HEAD
 app.get('/neworders',ordersController().index)
 
 app.get('/forgot-password', (req, res) => {
@@ -98,6 +111,8 @@ app.get('/forgot-password', (req, res) => {
 app.post('/forgot-password', fController().postForgot)
 app.get('/reset-password/:id/:token',  fController().reset)
 app.post('/reset-password/:id/:token', fController().postReset)
+=======
+>>>>>>> 1ec467e3701b61473fbed0eab46cdce444f5d62c
 }
 
 module.exports = initRoutes
