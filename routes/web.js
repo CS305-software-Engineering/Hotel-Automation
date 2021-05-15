@@ -30,9 +30,12 @@ function initRoutes(app){
      app.get('/staff', staffController().register_staff)
      app.post('/staff', staffController().postRegister_staff)
      app.get('/staff_list', staffController().displayStaff)
+<<<<<<< HEAD
      app.get('/staff_list', staffController().displayStaff)
      
      app.post('/orders',orderController().store)
+=======
+>>>>>>> 82f290d0b98ea56fbd2a973fd65da0418f3a6b56
 
       app.get('/manager', (req,res)=>{
         res.render('hotel/manager')
@@ -82,6 +85,10 @@ app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
+
+app.post('/orders',orderController().store)
+app.get('/customer/orders',orderController().index)
+
 
 app.get('/neworders',ordersController().index)
 }

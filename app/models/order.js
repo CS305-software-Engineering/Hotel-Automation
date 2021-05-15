@@ -8,7 +8,7 @@ const orderSchema = new Schema({
                 required: true
                 },
     items: { type: Object, required: true },
-    instructions: {type: String, required:true},
+    instructions: {type: String},
     phone: { type: String, required: true},
     address: { type: String, required: true},
     paymentType: { type: String, default: 'COD'},
