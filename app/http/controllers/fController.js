@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
+var nodemailer = require('nodemailer');
+
 
 function fController(){
     return {
@@ -97,7 +99,32 @@ function fController(){
         const token = jwt.sign(payload, secret, { expiresIn: '15m' });
         const link = `http://localhost:3000/reset-password/${user._id}/${token}`;
   // Some how sent the link to the users email
-        console.log(link);
+
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: '2018csb1090@iitrpr.ac.in',
+      pass: 'gazalgazal11'
+    }
+  });
+  
+  var mailOptions = {
+    from: '2018csb1090@iitrpr.ac.in',
+    to: '2018csb1090@iitrpr.ac.in',
+    subject: 'Sending Email using Node.js',
+    text: `http://localhost:3000/reset-password/${user._id}/${token}`
+    // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  
+      //  console.log(link);
         res.send('Password reset link has been sent to ur email...');
     }
       
