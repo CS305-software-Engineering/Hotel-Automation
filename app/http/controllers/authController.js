@@ -29,8 +29,9 @@ function authController(){
                     }
                     if(user.role=='customer')
                         return res.redirect('/u_home')
-                    else
-                        return res.redirect('/manager')
+                    else if(user.role == 'staff')
+                        return res.redirect('/staff_home')
+                    return res.redirect('/manager')
 
                 })
             })(req, res, next)

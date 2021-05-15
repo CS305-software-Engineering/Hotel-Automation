@@ -15,9 +15,9 @@ font-family: san-serif;
 }
  </style>
 </head>
-<body>
+<body style="background-color:white" >
     <%- include('../partials/manager_nav') %>
-    <table class="container table table-hover" style="margin-top: 100px;font-size:x-large">
+    <table style="background-color:white ;margin-top: 100px;font-size:x-large" class="container table table-hover" >
         <thead>
           <tr>
             <th scope="col">Staff Name</th>
@@ -25,11 +25,14 @@ font-family: san-serif;
             
           </tr>
         </thead>
-        <tbody>
+        <tbody  >
             <% users.forEach(function(user) { %>
                 <tr>
                    <td class="item" scope="row"><%= user.username %></td>
                     <td> <%= user.email %></td>
+                    <td> <a class="btn btn-danger" href="/staff_list/delete/<%= user._id %>">
+                      <i class="far fa-trash-alt"></i>&nbsp;Delete
+                    </a> </td>
                  </tr>
                 <% }) %>
         </tbody>   

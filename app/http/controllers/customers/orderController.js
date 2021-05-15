@@ -1,8 +1,11 @@
 const Order = require('../../../models/order')
 const moment = require('moment')
+//<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+//import Noty from noty
 //const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 
-function orderController () {
+
+  function orderController () {
     return {
         store(req, res) {
             const { paymentType, instructions, phone, address } = req.body
