@@ -18,12 +18,12 @@ font-family: san-serif;
 <body>
   
 
-    <table class="container table table-hover" style="margin-top: 100px;font-size:x-large">
-        <thead>
+    <table class="container table table-hover" style="margin-top: 100px;font-size:large">
+        <thead style="font-size:x-large">
           <tr>
             <th class="px-4 py-2 text-left">Orders</th>
+                <th class="px-4 py-2 text-left">Special Instructions</th>
                 <th class="px-4 py-2 text-left">Customer</th>
-                <th class="px-4 py-2 text-left">Address</th>
                 <th class="px-4 py-2 text-left">status</th>
                 <th class="px-4 py-2 text-left">Placed at</th>
                 <th class="px-4 py-2 text-left">Payment Status</th>
@@ -32,25 +32,35 @@ font-family: san-serif;
         </thead>
         <tbody id="orderTableBody" >
         
-           // <span style = "position: absolute"  class = "eye" onclick = "initAdmin()"><i style = "display:none" id = "hide1" class="fa fa-eye"></i><i  id = "hide2" class="fa fa-eye-slash"></i></span>
           
         </tbody>
     </table>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha512-NXUhxhkDgZYOMjaIgd89zF2w51Mub53Ru3zCNp5LTlEzMbNNAjTjDbpURYGS5Mop2cU4b7re1nOIucsVlrx9fA==" crossorigin="anonymous" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+      <style>
+        .noty_theme__mint {
+          border-radius: 50px!important;
+          padding-left: 8px!important;
+        }
+      </style>
 <script>
-
+    initAdmin()
   function initAdmin() {
       console.log("hi")
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
 
-    axios.get('hotel/neworders', {
+    axios.get('/neworders', {
         headers: {
             "X-Requested-With": "XMLHttpRequest"
         }
     }).then(res => {
         orders = res.data
+        console.log(orders)
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup
     }).catch(err => {
@@ -61,7 +71,7 @@ font-family: san-serif;
         let parsedItems = Object.values(items)
         return parsedItems.map((menuItem) => {
             return `
-                <p>${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
+                <p>${ menuItem.item.item } - ${ menuItem.qty } pcs </p>
             `
         }).join('')
     }
@@ -74,8 +84,8 @@ font-family: san-serif;
                     <p>${ order._id }</p>
                     <div>${ renderItems(order.items) }</div>
                 </td>
-                <td class="border px-4 py-2">${ order.customerId.name }</td>
-                <td class="border px-4 py-2">${ order.address }</td>
+                <td class="border px-4 py-2">${ order.instructions }</td>
+                <td class="border px-4 py-2">${ order.customerId.username } <br>${ order.phone }<br>${ order.address }</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
                         <form action="/admin/order/status" method="POST">
@@ -97,14 +107,6 @@ font-family: san-serif;
                                 </option>
                             </select>
                         </form>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20">
-                                <path
-                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                            </svg>
-                        </div>
                     </div>
                 </td>
                 <td class="border px-4 py-2">

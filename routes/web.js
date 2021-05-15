@@ -6,9 +6,10 @@ const userController = require('../app/http/controllers/customers/userController
 const staffController = require('../app/http/controllers/managers/staffController')
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
-const ordersController = require('../app/http/controllers/managers/ordersController')
+const AdminOrderController = require('../app/http/controllers/managers/orderController')
 
 const guest = require('../app/http/middlewares/guest')
+const auth = require('../app/http/middlewares/auth')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -22,7 +23,7 @@ function initRoutes(app){
     })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
      app.get('/previous_orders', orderController().displayOrder)
-     app.get('/completed_orders', ordersController().displayOrder)
+     app.get('/completed_orders', AdminOrderController().displayOrder)
      
      
      app.get('/u_register', authController().register_customer)
@@ -51,10 +52,6 @@ app.get('/staff', (req,res)=>{
 })
 app.get('/viewprofile', (req,res)=>{
   res.render('hotel/viewprofile')
-})
-
-app.get('/neworders', (req,res)=>{
-  res.render('hotel/neworders')
 })
 
 app.get('/addstaff', (req,res)=>{
@@ -87,11 +84,15 @@ app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
 
-app.post('/orders',orderController().store)
-app.get('/customer/orders',orderController().index)
+app.post('/orders', auth, orderController().store)
+app.get('/customer/orders', auth, orderController().index)
 
 
-app.get('/neworders',ordersController().index)
+app.get('/neworders',AdminOrderController().index)
+
+//Admin routes
+//app.get('/admin/orders', auth, AdminOrderController().index)
+
 }
 
 module.exports = initRoutes
