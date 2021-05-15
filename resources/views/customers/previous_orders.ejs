@@ -39,9 +39,10 @@ font-family: san-serif;
                     <td><%= order.address %></td>
                     <td><%= order.Date %></td>
                     <td><%= moment(order.createdAt).format('hh:mm A') %></td>
-                    <td><button class="btn btn-danger add-to-cart" data-menuitem="<%= JSON.stringify(order.item) %>">
-                      <i class="fas fa-cart-plus"></i>&nbsp;Reorder
-                    </button></td>
+                    <td>
+                      <button class="btn btn-danger add-to-cart" data-items="<%= JSON.stringify(order.items) %>">
+                       <i class="fas fa-cart-plus"></i>&nbsp;Reorder
+                      </button></td>
                  </tr>
                 <% }) %>
         <% } else { %>
@@ -66,8 +67,8 @@ font-family: san-serif;
     <script type="module">
       let addToCart = document.querySelectorAll('.add-to-cart')
       let cartCounter = document.querySelector('#cartCounter')
-      function updateCart(menuitem){
-        axios.post('/update-cart', menuitem).then(res => {
+      function updateCart(items){
+        axios.post('/reorder', items).then(res => {
           console.log(res)
           cartCounter.innerText = res.data.totalQty
           new Noty({
@@ -87,9 +88,9 @@ font-family: san-serif;
       }
 addToCart.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-        let menuitem = JSON.parse(btn.dataset.menuitem)
-        //console.log(menuitem)
-        updateCart(menuitem)
+        let items = JSON.parse(btn.dataset.items)
+        console.log(items)
+        updateCart(items)
         //console.log(menuitem)
     })
 })

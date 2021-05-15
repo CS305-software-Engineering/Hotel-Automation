@@ -7,13 +7,11 @@ function homeController(){
         async index(req,res) {
 
             const hotels = await Hotel.find()
-            console.log(hotels)
             return res.render('customers/u_home', {hotels: hotels})
         },
         async displayMenu(req,res) {
             const hotelname = req.params.hotelname
             const menu = await Menu.find({hotelname: hotelname})
-            console.log(menu)
             return res.render('customers/display_menu', {menu: menu})
            // res.render('hotel/menu')
         },

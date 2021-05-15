@@ -7,9 +7,10 @@ const staffController = require('../app/http/controllers/managers/staffControlle
 const menuController = require('../app/http/controllers/managers/menuController')
 const cartController = require('../app/http/controllers/customers/cartController')
 const AdminOrderController = require('../app/http/controllers/managers/orderController')
-
+//middlewares
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
+const manager = require('../app/http/middlewares/manager')
 
 function initRoutes(app){
      app.get('/', indexController().index)
@@ -83,12 +84,13 @@ app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)
 app.get('/cart/delete/:id', cartController().deleteitem)
+app.post('/reorder', cartController().reorder)
 
 app.post('/orders', auth, orderController().store)
 app.get('/customer/orders', auth, orderController().index)
 
 
-app.get('/neworders',AdminOrderController().index)
+app.get('/manager/orders', manager, AdminOrderController().index)
 
 //Admin routes
 //app.get('/admin/orders', auth, AdminOrderController().index)
