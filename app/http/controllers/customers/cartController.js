@@ -37,6 +37,7 @@ function cartController(){
                 cart.totalPrice = cart.totalPrice + req.body.price
             }
             return res.json({ totalQty: req.session.cart.totalQty})
+<<<<<<< Updated upstream
         },
         async delete(req,res){
 
@@ -62,6 +63,9 @@ function cartController(){
             return res.redirect('/cart')
 
     }
+=======
+        }
+>>>>>>> Stashed changes
     }
 }
 

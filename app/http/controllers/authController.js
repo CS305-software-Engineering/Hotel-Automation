@@ -1,11 +1,17 @@
 const User = require('../../models/user')
 const Hotel = require('../../models/hotel')
 
+<<<<<<< Updated upstream
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 
+=======
+const bcrypt = require('bcrypt')
+const passport = require('passport')
+
+>>>>>>> Stashed changes
 function authController(){
     return {
         login(req,res) {
@@ -29,9 +35,14 @@ function authController(){
                     }
                     if(user.role=='customer')
                         return res.redirect('/u_home')
+<<<<<<< Updated upstream
                     else if(user.role == 'staff')
                         return res.redirect('/staff_home')
                     return res.redirect('/manager')
+=======
+                    else
+                        return res.redirect('/manager')
+>>>>>>> Stashed changes
 
                 })
             })(req, res, next)
@@ -58,6 +69,7 @@ function authController(){
                     return res.redirect('/u_register')
                 }
             })
+<<<<<<< Updated upstream
 
             const token = jwt.sign({username,email,password},process.env.JWT_ACC_ACTIVATE,{expiresIn: '20m'});
 
@@ -79,6 +91,8 @@ function authController(){
             //    console.log(body);
          //   });
 
+=======
+>>>>>>> Stashed changes
             //Hash password
             const hashedPassword = await bcrypt.hash(password, 10)
             //Create user in database

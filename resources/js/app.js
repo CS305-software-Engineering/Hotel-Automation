@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import axios from 'axios'
 import Noty from 'noty'
 import { initAdmin } from './admin'
@@ -6,10 +7,15 @@ import moment from 'moment'
  
  let addToCart = document.querySelectorAll('.add-to-cart')
  initAdmin(); 
+=======
+let addToCart = document.querySelectorAll('.add-to-cart')
+
+>>>>>>> Stashed changes
 addToCart.forEach((btn) => {
     btn.addEventListener('click', (e) => {
         console.log(e)
     })
+<<<<<<< Updated upstream
 })
 
 const alertMsg = document.querySelector('#success-alert')
@@ -82,3 +88,6 @@ updateStatus(order);
 //         progressBar: false,
 //     }).show();
 // })
+=======
+})
+>>>>>>> Stashed changes
