@@ -8,6 +8,7 @@ const orderSchema = new Schema({
                 required: true
                 },
     items: { type: Object, required: true },
+    hotel:{type:String},
     instructions: {type: String},
     phone: { type: String, required: true},
     address: { type: String, required: true},

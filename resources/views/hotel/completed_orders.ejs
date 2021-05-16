@@ -15,9 +15,9 @@ font-family: san-serif;
 }
  </style>
 </head>
-<body>
+<body >
     <%- include('../partials/manager_nav') %>
-    <table class="container table table-hover" style="margin-top: 100px;font-size:x-large">
+    <table class="container table table-hover" style="margin-top: 100px;font-size:x-large ; background-color: grey;">
         <thead>
           <tr>
             <th scope="col">Order-Items</th>
@@ -29,10 +29,10 @@ font-family: san-serif;
             
           </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: white;">
             <% orders.forEach(function(order) { %>
                 <tr>
-                    Hi
+                   
                     <td class="item" scope="row"><%= order.items %></td>
                     <td> <%= order.customerId %></td>
                     <td> <%= order.paymentType %></td>

@@ -1,3 +1,4 @@
+ 
 const User = require('../../models/user')
 const Hotel = require('../../models/hotel')
 

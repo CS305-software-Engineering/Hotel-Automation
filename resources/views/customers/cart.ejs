@@ -30,7 +30,6 @@
             <th scope="col">Quantity</th>
             <th scope="col">Total Price</th>
             <th scope="col">Action</th>
-
           </tr>
         </thead>
         <tbody>
@@ -85,7 +84,6 @@
     </tfoot>
       </table>
         <hr>
-
     </div>
     <% } else { %>
     <div class="empty-cart py-16">
@@ -115,7 +113,6 @@
     </style>
   <script type="module">
     let deleteCartButton = document.querySelectorAll('.deleteCartButton')
-
     let cartCounter = document.querySelector('#cartCounter')
 function deleteCart(menuitem){
       axios.post('/delete-cart', menuitem).then(res => {
@@ -146,4 +143,3 @@ function deleteCart(menuitem){
   </script>
 </body>
 </html>
-
