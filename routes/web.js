@@ -83,6 +83,8 @@ app.get('/staff_list/delete/:id', staffController().deleteStaff)
 app.post('/change_password', userController().changePassword);
 app.get('/changePassword', userController().renderchangePassword);
 
+
+
 app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update)
 app.post('/delete-cart', cartController().delete)

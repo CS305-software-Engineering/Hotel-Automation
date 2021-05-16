@@ -20,7 +20,7 @@ font-family: san-serif;
     <table class="container table table-hover" style="margin-top: 100px;font-size:x-large ; background-color: grey;">
         <thead>
           <tr>
-            <th scope="col">Order-Items</th>
+            <th scope="col">Order-ID</th>
             <th scope="col">Customer-Id</th>
             <th scope="col">Payment-Type</th>
             <th scope="col">Instructions</th>
@@ -33,7 +33,7 @@ font-family: san-serif;
             <% orders.forEach(function(order) { %>
                 <tr>
                    
-                    <td class="item" scope="row"><%= order.items %></td>
+                    <td class="item" scope="row"><%= order._id %></td>
                     <td> <%= order.customerId %></td>
                     <td> <%= order.paymentType %></td>
                     <td> <%= order.instructions %></td>
