@@ -66,8 +66,8 @@ app.get('/completedorder', (req,res)=>{
 })
 
 // app.get('/staff_list', (req,res)=>{
-//  res.render('hotel/staff_list')
-// })
+//   res.render('hotel/staff_list')
+//  })
 
 app.get('/rawmaterials', (req,res)=>{
   res.render('hotel/rawmaterials')
