@@ -99,7 +99,9 @@ app.get('/manager/orders', manager, AdminOrderController().index)
 app.post('/manager/order/status', manager, statusController().update)
 
 
-//app.get('/neworders',ordersController().index)
+app.get('/my-orders', (req, res) => {
+  res.render('customers/my-orders');
+});
 
 app.get('/forgot-password', (req, res) => {
   res.render('auth/forgot-password');
