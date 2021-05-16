@@ -2,8 +2,13 @@ const Order = require('../../../models/order')
 function orderController () {
     return {
         
-        index(req, res) {
-            Order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => {
+        async index(req, res) {
+            var hotel = await Hotel.findOne({email:req.user.email})
+            const orders = Order.find({ $and: [
+                 // pending orders
+                 {"status" :{$ne: "completed"} },
+                 {"hotel" : {$eq: hotel}}
+              ] }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => {
                 if(req.xhr) {
                     return res.json(orders)
                 } else {
@@ -12,13 +17,15 @@ function orderController () {
             })
 
          },
-        async displayOrder(req,res) {
+        async completedOrder(req,res) {
             var x = new Date().toISOString().slice(0,10);
+            var hotel = await Hotel.findOne({email:req.user.email})
             const orders = await Order.find({
                 $and: [
                   { "Date": { $eq: x }},
                    // change later to completed
                    {"status" :{$eq: "order_placed"} },
+                   {"hotel" : {$eq: hotel}}
                 ]
               })
             

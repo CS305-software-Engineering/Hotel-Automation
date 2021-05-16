@@ -110,7 +110,7 @@ function fController(){
   
   var mailOptions = {
     from: '2018csb1090@iitrpr.ac.in',
-    to: '2018csb1090@iitrpr.ac.in',
+    to: user.email,
     subject: 'Sending Email using Node.js',
     text: `http://localhost:3000/reset-password/${user._id}/${token}`
     // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        

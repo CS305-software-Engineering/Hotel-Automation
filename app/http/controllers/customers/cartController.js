@@ -37,7 +37,6 @@ function cartController(){
                 cart.totalPrice = cart.totalPrice + req.body.price
             }
             return res.json({ totalQty: req.session.cart.totalQty})
-
         },
         async delete(req,res){
 
@@ -61,9 +60,47 @@ function cartController(){
            // return res.json({ totalQty: req.session.cart.totalQty})
 
             return res.redirect('/cart')
-        }
-    }
 
+    },
+    reorder(req,res){
+        /*
+        let cart = {
+            items: {
+                itemId: { item: Object, qty:0},
+            },
+            totalQty: 0,
+            totalPrice: 0
+        }*/
+        //for first time,creating cart
+        if(!req.session.cart){
+            req.session.cart = {
+                items: {},
+                totalQty: 0,
+                totalPrice: 0
+            }
+        }
+        let cart = req.session.cart
+        items = req.body
+        for (const id in items) {
+            item = items[id].item
+            //check if item doesn't exist in cart
+            if(!cart.items[item._id]){
+                cart.items[item._id] = {
+                    item: item,
+                    qty: items[id].qty,
+                }
+                cart.totalQty = cart.totalQty + items[id].qty
+                cart.totalPrice = cart.totalPrice + items[id].qty*item.price
+            } else {
+                cart.items[item._id].qty = cart.items[item._id].qty + items[id].qty
+                cart.totalQty = cart.totalQty + items[id].qty
+                cart.totalPrice = cart.totalPrice + items[id].qty*item.price
+            }
+          }
+        
+        return res.json({ totalQty: req.session.cart.totalQty})
+    },
     }
+}
 
 module.exports = cartController
