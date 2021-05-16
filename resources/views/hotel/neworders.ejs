@@ -15,12 +15,12 @@ font-family: san-serif;
 }
  </style>
 </head>
-<body>
+<body style=" background-color: grey">
     <%- include('../partials/manager_nav') %>
 
-    <table class="container table table-hover" style="margin-top: 100px;font-size:large; background-color: white" >
+    <table class="container table table-hover" style="margin-top: 100px;font-size:large; background-color: grey" >
         <thead style="font-size:x-large">
-          <tr style="background-color: grey">
+          <tr >
             <th class="px-4 py-2 text-left">Orders</th>
                 <th class="px-4 py-2 text-left">Special Instructions</th>
                 <th class="px-4 py-2 text-left">Customer</th>
@@ -30,11 +30,11 @@ font-family: san-serif;
 
           </tr>
         </thead>
-        <tbody id="orderTableBody" >
+        <tbody id="orderTableBody">
         
           
         </tbody>
-    </table>
+    </table >
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
