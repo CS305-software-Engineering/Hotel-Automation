@@ -51,23 +51,23 @@
   color: inherit;
 }
 
-.status-box ul li:nth-child(1) span:before {
+.status-box ul li:nth-child(2) span:before {
   content: "\F46C";
 }
 
-.status-box ul li:nth-child(2) span:before {
+.status-box ul li:nth-child(3) span:before {
   content: "\F560";
 }
 
-.status-box ul li:nth-child(3) span:before {
+.status-box ul li:nth-child(4) span:before {
   content: "\F818";
 }
 
-.status-box ul li:nth-child(4) span:before {
+.status-box ul li:nth-child(5) span:before {
   content: "\F0D1";
 }
 
-.status-box ul li:nth-child(5) span:before {
+.status-box ul li:nth-child(6) span:before {
   content: "\F582";
 }
 
@@ -86,7 +86,7 @@
   margin-top: 10px;
 }
 
-.status-box ul li:nth-child(5) span:after {
+.status-box ul li:nth-child(6) span:after {
   box-shadow: 0 20px 1px 20px #F8F8F8;
 }
 
@@ -134,6 +134,8 @@
                 <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
             </div>
             <ul>
+                <li class="status_line text-sm md:text-xl pb-16" data-status="declined"><span>Order Declined</span>
+                </li>
                 <li class="status_line text-sm md:text-xl pb-16" data-status="order_placed"><span>Order Placed</span>
                 </li>
                 <li class="status_line text-sm md:text-xl pb-16" data-status="confirmed"><span>Order confirmation</span>
@@ -171,7 +173,11 @@ let time = document.createElement('small')
         status.classList.remove('current')
     })
     let stepCompleted = true;
-    statuses.forEach((status) => {
+    if(order.status === 'declined'){
+        window.location.replace("/customer/orders");
+    }
+    else{
+        statuses.forEach((status) => {
        let dataProp = status.dataset.status
        if(stepCompleted) {
             status.classList.add('step-completed')
@@ -185,6 +191,7 @@ let time = document.createElement('small')
            }
        }
     })
+    }
 
 }
 
@@ -204,12 +211,23 @@ socket.on('orderUpdated', (data) => {
     updatedOrder.updatedAt = moment().format()
     updatedOrder.status = data.status
     updateStatus(updatedOrder)
-    new Noty({
-        type: 'success',
+
+    if(updatedOrder.status == 'declined'){
+        new Noty({
+        type: 'error',
         timeout: 1000,
-        text: 'Order updated',
+        text: 'Sorry! Order canceled by hotel...',
         progressBar: false,
     }).show();
+    }else{
+        new Noty({
+            type: 'success',
+            timeout: 1000,
+            text: 'Order updated',
+            progressBar: false,
+        }).show();
+    }
+   
 })
 </script>
 </body>
