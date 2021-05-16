@@ -35,6 +35,7 @@ font-family: san-serif;
           
         </tbody>
     </table>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous"></script>
@@ -97,6 +98,8 @@ font-family: san-serif;
                                     Placed</option>
                                 <option value="confirmed" ${ order.status === 'confirmed' ? 'selected' : '' }>
                                     Confirmed</option>
+                                    <option value="declined" ${ order.status === 'declined' ? 'selected' : '' }>
+                                    Declined</option>
                                 <option value="prepared" ${ order.status === 'prepared' ? 'selected' : '' }>
                                     Prepared</option>
                                 <option value="delivered" ${ order.status === 'delivered' ? 'selected' : '' }>
@@ -118,7 +121,36 @@ font-family: san-serif;
             </tr>
         `
         }).join('')
+
     }
+    
+// Socket
+let socket = io()
+let adminAreaPath = window.location.pathname
+    console.log(adminAreaPath)
+    if(adminAreaPath.includes('manager')) {
+        initAdmin(socket)
+        socket.emit('join', 'adminRoom')
+
+    }
+
+         // Socket
+        socket.on('orderPlaced', (order) => {
+        new Noty({
+            type: 'success',
+            timeout: 1000,
+            text: 'New order!',
+            progressBar: false,
+        }).show();
+        orders.unshift(order)
+        orderTableBody.innerHTML = ''
+        orderTableBody.innerHTML = generateMarkup(orders)
+    })
+    
+
+   
+       
+
     // Socket
     // socket.on('orderPlaced', (order) => {
     //     new Noty({

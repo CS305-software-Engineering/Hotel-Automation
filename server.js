@@ -10,6 +10,7 @@ const session = require('express-session')
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')
 const passport = require('passport')
+const Emitter = require('events')
 
 //mongodb connection
 const url = 'mongodb+srv://harshagarg09:harshagarg09@cluster0.iizlz.mongodb.net/atithi?retryWrites=true&w=majority'
@@ -31,6 +32,11 @@ let mongoStore = MongoDbStore.create({
                     //   mongooseConnection: connection,
                        collection: 'sessions'
                    })
+
+// Event emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter', eventEmitter)
+
 //Session config
 app.use(session({
    secret: process.env.COOKIE_SECRET,
@@ -60,13 +66,33 @@ app.use(passport.session())
 })
 
 
- require('./routes/web')(app)
+require('./routes/web')(app)
 
-
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`)
-})
 //set Template engine
 app.use(expressLayout)
 app.set('views', path.join(__dirname, '/resources/views'))
 app.set('view engine', 'ejs')
+
+
+
+const server = app.listen(PORT , () => {
+   console.log(`Listening on port ${PORT}`)
+})
+
+// Socket
+
+const io = require('socket.io')(server)
+io.on('connection', (socket) => {
+   // Join
+   socket.on('join', (orderId) => {
+      socket.join(orderId)
+   })
+})
+
+eventEmitter.on('orderUpdated', (data) => {
+   io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+eventEmitter.on('orderPlaced', (data) => {
+   io.to('adminRoom').emit('orderPlaced', data)
+})

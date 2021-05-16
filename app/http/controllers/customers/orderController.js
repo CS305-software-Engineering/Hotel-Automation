@@ -22,10 +22,16 @@ const moment = require('moment')
                 paymentType,
             })
             order.save().then(result => {
-                req.flash('success','Order placed successfully')
-                console.log('Saved....')
-                delete req.session.cart
-                return res.redirect('/customer/orders')
+                Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
+                    req.flash('success','Order placed successfully')
+                    console.log('Saved....')
+                    delete req.session.cart
+                    // Emit
+                    const eventEmitter = req.app.get('eventEmitter')
+                    eventEmitter.emit('orderPlaced', placedOrder)
+    
+                    return res.redirect('/customer/orders')
+                })     
             }).catch(err => {
                 req.flash('error','Something went wrong')
                 console.log('Not saved....')
