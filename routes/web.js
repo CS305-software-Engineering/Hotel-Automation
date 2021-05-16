@@ -10,31 +10,28 @@ const cartController = require('../app/http/controllers/customers/cartController
 const AdminOrderController = require('../app/http/controllers/managers/orderController')
 const statusController = require('../app/http/controllers/managers/statusController')
 
-<<<<<<< HEAD
-=======
 //middlewares
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
 const manager = require('../app/http/middlewares/manager')
 
->>>>>>> 1ec467e3701b61473fbed0eab46cdce444f5d62c
 function initRoutes(app){
      app.get('/', indexController().index)
      
-     app.get('/u_home', homeController().index)
+     app.get('/u_home',auth, homeController().index)
      app.get('/u_hotel', (req,res)=>{
        res.render('customers/u_hotel')
      })
      app.get('/display_menu/:hotelname', homeController().displayMenu)
      app.get('/previous_orders', orderController().displayOrder)
-     app.get('/completed_orders', AdminOrderController().displayOrder)
+     app.get('/completed_orders', AdminOrderController().completedOrder)
      
      
      app.get('/u_register', authController().register_customer)
      app.post('/u_register', authController().postRegister_customer)
      app.get('/manager_register', authController().register_manager)
      app.post('/manager_register', authController().postRegister_manager)
-     app.get('/login', authController().login)
+     app.get('/login',authController().login)
      app.post('/login', authController().postLogin)
      app.post('/logout',authController().logout)
      app.get('/staff', staffController().register_staff)
@@ -102,8 +99,7 @@ app.get('/manager/orders', manager, AdminOrderController().index)
 app.post('/manager/order/status', manager, statusController().update)
 
 
-<<<<<<< HEAD
-app.get('/neworders',ordersController().index)
+//app.get('/neworders',ordersController().index)
 
 app.get('/forgot-password', (req, res) => {
   res.render('auth/forgot-password');
@@ -111,8 +107,6 @@ app.get('/forgot-password', (req, res) => {
 app.post('/forgot-password', fController().postForgot)
 app.get('/reset-password/:id/:token',  fController().reset)
 app.post('/reset-password/:id/:token', fController().postReset)
-=======
->>>>>>> 1ec467e3701b61473fbed0eab46cdce444f5d62c
 }
 
 module.exports = initRoutes
