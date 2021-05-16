@@ -57,6 +57,7 @@ font-family: san-serif;
         socket.emit('join', 'adminRoom')
 
     }
+    let orderData = []
   function initAdmin() {
       console.log("hi")
     const orderTableBody = document.querySelector('#orderTableBody')
@@ -69,6 +70,7 @@ font-family: san-serif;
         }
     }).then(res => {
         orders = res.data
+        orderData = orders
         console.log(orders)
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup
@@ -143,9 +145,9 @@ font-family: san-serif;
             text: 'New order!',
             progressBar: false,
         }).show();
-        orders.unshift(order)
+        orderData.unshift(order)
         orderTableBody.innerHTML = ''
-        orderTableBody.innerHTML = generateMarkup(orders)
+        orderTableBody.innerHTML = generateMarkup(orderData)
     })
     
 
