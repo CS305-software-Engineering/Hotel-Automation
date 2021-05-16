@@ -48,7 +48,15 @@ font-family: san-serif;
         }
       </style>
 <script>
-    initAdmin()
+   // initAdmin()
+    let socket = io()
+    let adminAreaPath = window.location.pathname
+    console.log(adminAreaPath)
+    if(adminAreaPath.includes('manager')) {
+        initAdmin()
+        socket.emit('join', 'adminRoom')
+
+    }
   function initAdmin() {
       console.log("hi")
     const orderTableBody = document.querySelector('#orderTableBody')
@@ -125,14 +133,7 @@ font-family: san-serif;
     }
     
 // Socket
-let socket = io()
-let adminAreaPath = window.location.pathname
-    console.log(adminAreaPath)
-    if(adminAreaPath.includes('manager')) {
-        initAdmin(socket)
-        socket.emit('join', 'adminRoom')
 
-    }
 
          // Socket
         socket.on('orderPlaced', (order) => {
